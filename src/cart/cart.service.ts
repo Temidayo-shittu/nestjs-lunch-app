@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, Request,  HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -7,7 +8,7 @@ import { RestaurantService } from 'src/restaurant/restaurant.service';
 import { Cart, CartDocument } from 'src/schemas/cart.schema';
 import { UserService } from 'src/user/user.service';
 import { ApiFeatures } from 'src/utils/api-feature';
-import { checkPermissions } from 'src/utils/check-permissions';
+//import { checkPermissions } from 'src/utils/check-permissions';
 
 @Injectable()
 export class CartService {
@@ -39,7 +40,7 @@ export class CartService {
         const resultPerPage = parseInt(req.query.limit) || totalCartCount;
         const page = parseInt(req.query.page) || 1;
 
-        let query = this.cartModel.find({}).populate({path:'restaurant', select:'name description location email'})
+        const query = this.cartModel.find({}).populate({path:'restaurant', select:'name description location email'})
                                            .populate({path:'user',select:'username email'}); 
 
         const apiFeatures = new ApiFeatures<CartDocument>(query, queryStry);
@@ -110,6 +111,7 @@ export class CartService {
     console.log(req.user.email, cart.user.email)
     //checkPermissions(req.user, cart.user)
     if(cart.user.email !== req.user.email) throw new HttpException('You do not have permission to delete this cart', HttpStatus.UNAUTHORIZED);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const deletedCart = await this.cartModel.findByIdAndDelete(id);
     return {msg:"Cart Item successfully deleted"};
   }

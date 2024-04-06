@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, UseGuards, Request, Post, Get, Param, Body } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';

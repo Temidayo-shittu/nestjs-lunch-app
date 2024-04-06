@@ -1,4 +1,5 @@
-import { Injectable, Request, NotFoundException, ForbiddenException, HttpException, HttpStatus } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Injectable, Request, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { RestaurantDto } from 'src/dto/create-restaurant-dto';
@@ -28,7 +29,7 @@ export class RestaurantService {
         const resultPerPage = parseInt(req.query.limit) || totalRestaurantCount;
         const page = parseInt(req.query.page) || 1;
       
-        let query = this.restaurantModel.find({}); 
+        const query = this.restaurantModel.find({}); 
       
         const apiFeatures = new ApiFeatures<RestaurantDocument>(query, queryStry);
       
